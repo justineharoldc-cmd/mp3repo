@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flower with Tristan</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f8ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .flower {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .petal:nth-child(1) { top: 0; left: 40px; }
+    .petal:nth-child(2) { top: 40px; left: 80px; }
+    .petal:nth-child(3) { top: 80px; left: 40px; }
+    .petal:nth-child(4) { top: 40px; left: 0; }
+
+    .center {
+      position: absolute;
+      top: 60px;
+      left: 60px;
+      width: 100px;
+      height: 100px;
+      background: gold;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+      text-transform: lowercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="flower">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center">tristan  mendoza</div>
+  </div>
+</body>
+</html>

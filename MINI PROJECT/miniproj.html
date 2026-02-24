@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Quiz Bee</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #808080;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-box {
+      background: white;
+      padding: 20px;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .answers button:hover {
+      background: #2980b9;
+    }
+
+    #nextBtn {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #2ecc71;
+      color: white;
+      cursor: pointer;
+      display: none;
+    }
+
+    #score {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-box">
+  <h2 id="question">Question here</h2>
+  <div class="answers" id="answers"></div>
+  <button id="nextBtn">Next</button>
+  <div id="score"></div>
+</div>
+
+<script>
+  const quiz = [
+    {
+      question: "1. What is 2 + 2?",
+      answers: ["3", "4", "5", "6"],
+      correct: 1
+    },
+    {
+      question: "2. What color is the sky?",
+      answers: ["Blue", "Green", "Red", "Yellow"],
+      correct: 0
+    },
+    {
+      question: "3. Which is a programming language?",
+      answers: ["HTML", "CSS", "JavaScript", "All of the above"],
+      correct: 3
+    },
+    {
+      question: "4. What planet do we live on?",
+      answers: ["Mars", "Earth", "Venus", "Jupiter"],
+      correct: 1
+    },
+    {
+      question: "5. What is 5 x 3?",
+      answers: ["15", "10", "20", "25"],
+      correct: 0
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  const questionEl = document.getElementById("question");
+  const answersEl = document.getElementById("answers");
+  const nextBtn = document.getElementById("nextBtn");
+  const scoreEl = document.getElementById("score");
+
+  function loadQuestion() {
+    nextBtn.style.display = "none";
+    answersEl.innerHTML = "";
+
+    const current = quiz[currentQuestion];
+    questionEl.textContent = current.question;
+
+    current.answers.forEach((answer, index) => {
+      const button = document.createElement("button");
+      button.textContent = answer;
+      button.onclick = () => selectAnswer(index);
+      answersEl.appendChild(button);
+    });
+  }
+
+  function selectAnswer(index) {
+    const correct = quiz[currentQuestion].correct;
+    const buttons = answersEl.querySelectorAll("button");
+
+    buttons.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === correct) {
+        btn.style.background = "#2ecc71";
+      } else {
+        btn.style.background = "#e74c3c";
+      }
+    });
+
+    if (index === correct) {
+      score++;
+    }
+
+    nextBtn.style.display = "inline-block";
+  }
+
+  nextBtn.onclick = () => {
+    currentQuestion++;
+    if (currentQuestion < quiz.length) {
+      loadQuestion();
+    } else {
+      questionEl.textContent = "Quiz Finished!";
+      answersEl.innerHTML = "";
+      nextBtn.style.display = "none";
+      scoreEl.textContent = "Your Score: " + score + " / " + quiz.length;
+    }
+  };
+
+  loadQuestion();
+</script>
+
+</body>
+</html>
